@@ -1,4 +1,4 @@
-# TP n°02 : copier des fichiers
+# TP n°02 : créer un utilisateur
 
 ## Introduction
 
