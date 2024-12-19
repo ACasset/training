@@ -1,0 +1,25 @@
+---
+
+# Un nom  pour identifier le playbook, celui-ci sera affiché lors de l'exécution, mais il n'a aucune incidence fonctionnelle
+# Notez le tiret en début de ligne, qui indique une liste ou un dictionnaire en YAML, et qui est indispensable pour le bon fonctionnement du playbook
+- name: Playbook du TP n°01
+  # Le mot clé 'hosts' indique sur quel groupe ou quelles machines de l'inventaire on va tenter d'effectuer les actions
+  # Pour plus d'informations sur les possibilités du mot clé 'hosts', se référer à la documentation officielle : https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html
+  hosts: all
+  # Le mot clé 'tasks' indique qu'on va lister les différentes actions à effectuer sur les hôtes
+  tasks:
+    # Comme pour la déclaration du playbook, on peut indiquer un nom pour aider à identifier la task (aussi bien dans l'éditeur de code que pendant l'exécution)
+    # De plus, là aussi, chaque task doit faire partie d'un dictionnaire
+    - name: Copie d'un fichier
+      # On va appeler un 'module' Ansible pour effectuer notre action
+      # Par souci de clarté, on va utiliser le FQCN (Fully Qualified Collection Name) de ce module
+      # Il s'agit d'un module natif, donc le FQCN commence par 'ansible.builtin.', et il s'intitule 'copy'
+      # Ce dernier sert à copier un fichier vers les hôtes
+      # Sa documentation est disponible ici : https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+      ansible.builtin.copy:
+        # Pour cette première utilisation d'Ansible et du module 'copy', le contenu du fichier n'importe pas, on veut juste réussir à le faire fonctionner
+        # Ainsi, on va déclarer le contenu du fichier ici, avec l'utilisation du paramètre 'content'
+        content: Hello world
+        # Mais ce n'est pas suffisant pour le module 'copy', il va avoir besoin d'autres paramètres, par exemple pour savoir où placer ce fichier.
+        # Consultez la documentation pour connaître ces paramètres.
+        parametre: valeur

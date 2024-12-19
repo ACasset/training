@@ -1,0 +1,10 @@
+# TODO: faire certaines actions avec du become et d'autres sans (genre un pré-check)
+
+
+    - name: Copie d'un fichier dynamique
+      ansible.builtin.template:
+        src: fichier_dynamique
+        dest: "{{ }}"
+        owner: x
+        group: x
+        mode: x

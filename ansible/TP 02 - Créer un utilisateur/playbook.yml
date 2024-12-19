@@ -1,0 +1,28 @@
+---
+
+- name: Playbook du TP n°02
+  hosts: all
+  tasks:
+    - name: Création d'un utilisateur
+      # Le mot clé 'become' détermine l'utilisation d'une escalade de privilège pour l'action qui l'appelle
+      # La création d'un utilisateur a typiquement besoin d'une telle escalade
+      become: true
+      # Cette fois, pour créer un utilisateur, on va utiliser le module natif 'user'
+      # Sa documentation est disponible ici : https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+      ansible.builtin.user:
+        # On va utiliser la variable 'nom_utilisateur' qui pourra varier d'un hôte à l'autre plutôt que de renseigner un nom d'utilisateur unique en dur
+        # Une variable se déclare en entourant son nom de doubles crochets {{ }}
+        # Le caractère { étant spécial en YAML, on va entourer la valeur de guillemets "" pour indiquer à Ansible qu'il s'agit bien d'une chaîne de caractères
+        name: "{{ nom_utilisateur }}"
+        # Et, de la même façon, on va utiliser la variable 'mot_de_passe_utilisateur'
+        password: "{{ mot_de_passe_utilisateur }}"
+
+    - name: Copie d'un fichier statique dans le répertoire home de l'utilisateur
+      # Comme on va copier le fichier dans le répertoire d'un autre utilisateur, on a besoin d'une escalade de privilèges ici aussi
+      become: true
+      ansible.builtin.copy:
+        # Comme on utilise le module 'copy', Ansible ira chercher tout seul les fichiers dans le répertoire 'files'
+        src: fichier_statique
+        # On va réutiliser la variable 'nom_utilisateur' pour trouver le répertoire home de l'utilisateur fraîchement créé
+        # Notez que la variable étant au milieu de la chaîne de caractères, on a pas besoin de l'entourer de guillemets cette fois-ci
+        dest: /home/{{ nom_utilisateur }}/fichier_statique

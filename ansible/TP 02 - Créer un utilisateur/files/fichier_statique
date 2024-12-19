@@ -1,0 +1,5 @@
+Ceci est un exemple de fichier plus complexe
+Il n'y a pas vraiment de limite de lignes pour ces fichiers, il peuvent même être des archives ou des binaires
+Cependant, gardez à l'esprit que votre code Ansible devrait être versionné sur Git
+Et que bien que Git supporte de stocker de gros fichiers binaires (notamment avec Git LFS)
+Ce n'est pas une bonne pratique que de le faire
